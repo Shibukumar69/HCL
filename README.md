@@ -5,7 +5,7 @@
 ---
 
 ### 📑 Project Reports & Academic Documentation
-- 📄 **SRS Document (Word Format)**: [Download/View SRS Document (`documents/P_022_SRS_ABES_Format.docx`)](./documents/P_022_SRS_ABES_Format.docx)
+- 📄 **SRS Document (Word Format)**: [Download/View SRS Document (`documents/P_022_SRS_ABES_Format_v3_8pagesnew.docx`)](./documents/P_022_SRS_ABES_Format_v3_8pagesnew.docx)
 - 🎓 **Capstone Viva & Presentation Guide**: [View Viva Cheatsheet (`CAPSTONE_VIVA_GUIDE.md`)](./CAPSTONE_VIVA_GUIDE.md)
 
 ---
