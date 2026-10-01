@@ -18,7 +18,7 @@ services:
       timeout: 20s
       retries: 10
 
-  # 2. Node.js Backend API Service
+  # 2. Java Spring Boot Backend API Service
   backend:
     build:
       context: ./backend
@@ -26,14 +26,13 @@ services:
     container_name: retail_backend_api
     restart: always
     environment:
-      PORT: 5000
+      SERVER_PORT: 5000
       DB_HOST: mysql_db
       DB_USER: root
       DB_PASSWORD: rootpassword
       DB_NAME: retail
       DB_PORT: 3306
-      JWT_SECRET: superSecretRetailInventoryKey2026
-      NODE_ENV: production
+      JWT_SECRET: superSecretRetailInventoryKey2026superSecretRetailInventoryKey2026
     ports:
       - "5000:5000"
     depends_on:

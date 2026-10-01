@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ApiResponse, Warehouse, InventoryItem, StockTransferRequest } from '../models/api.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WarehouseService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/warehouses';
+  private apiUrl = `${environment.apiUrl}/warehouses`;
 
   getWarehouses(): Observable<Warehouse[]> {
     return this.http.get<ApiResponse<Warehouse[]>>(this.apiUrl).pipe(

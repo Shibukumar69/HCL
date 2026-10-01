@@ -1,18 +1,15 @@
-# Production Dockerfile for Node.js Backend
-FROM node:20-alpine
+# Build Stage
+FROM eclipse-temurin:21-jdk-alpine AS build
+WORKDIR /app
+COPY pom.xml mvnw mvnw.cmd ./
+COPY .mvn .mvn
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
+COPY src ./src
+RUN ./mvnw clean package -DskipTests
 
-# Working directory
-WORKDIR /usr/src/app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copy application source code
-COPY . .
-
-# Expose backend port
+# Runtime Stage
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 5000
-
-# Start server
-CMD ["node", "index.js"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ApiResponse, User } from '../models/api.models';
+import { environment } from '../../../environments/environment';
 
 export interface AuthResponseData {
   user: User;
@@ -13,7 +14,7 @@ export interface AuthResponseData {
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
 
   currentUser = signal<User | null>(this.getStoredUser());
   token = signal<string | null>(localStorage.getItem('token'));

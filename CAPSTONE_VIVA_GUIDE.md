@@ -6,7 +6,7 @@
 ---
 
 ## 🎯 1. Project Introduction (30-Second Elevator Pitch)
-> *"Hamara project ek enterprise-level **Retail Inventory Management System** hai jo Agile/Scrum methodology ke 8 Epics aur 15 Sprints mein build kiya gaya hai. Isme multi-warehouse stock tracking, real-time catalog management, automated order fulfillment with stock deduction, aur vendor procurement ko **Node.js, Express, MySQL, aur Angular 19** par implement kiya gaya hai. System ko **Docker** containerization aur **Jenkins CI/CD** pipeline ke sath production-ready banaya gaya hai."*
+> *"Hamara project ek enterprise-level **Retail Inventory Management System** hai jo Agile/Scrum methodology ke 8 Epics aur 15 Sprints mein build kiya gaya hai. Isme multi-warehouse stock tracking, real-time catalog management, automated order fulfillment with stock deduction, aur vendor procurement ko **Java Spring Boot 3, Spring Data JPA, Spring Security (JWT), MySQL 8, aur Angular 19** par implement kiya gaya hai. System ko **Docker** containerization aur **Jenkins CI/CD** pipeline ke sath production-ready banaya gaya hai."*
 
 ---
 
@@ -16,17 +16,17 @@
 - **Answer:** *"Inventory aur Retail systems mein **ACID properties (Atomicity, Consistency, Isolation, Durability)** aur **Data Integrity** critical hoti hain. Stock transfer aur order fulfillment ke dauran transactions use hote hain taaki stock kabhi mismatch na ho. Is relational structure (Products ➔ Warehouses ➔ Orders) ke liye SQL/MySQL best rehta hai."*
 
 ### Q2: How did you implement Inter-Warehouse Stock Transfer safely?
-- **Answer:** *"Humne MySQL **Database Transactions** (`connection.beginTransaction()`, `commit()`, `rollback()`) use kiya hai. Jab Source Warehouse (Delhi) se stock minus hota hai aur Destination (Bangalore) mein add hota hai, agar beech mein koi error aaye, toh pura operation automatically `rollback` ho jata hai, jisse inventory data kabhi corrupt nahi hota."*
+- **Answer:** *"Humne Spring Boot `@Transactional` aur JPA Pessimistic Locking (`@Lock(LockModeType.PESSIMISTIC_WRITE)`) use kiya hai. Jab Source Warehouse se stock minus hota hai aur Destination mein add hota hai, agar beech mein koi error aaye, toh pura operation automatically rollback ho jata hai, jisse concurrency conflict ya inventory data kabhi corrupt nahi hota."*
 
-### Q3: What is the 3-Tier Layered Architecture in your Backend?
+### Q3: What is the Controller-Service-Repository Architecture in your Spring Boot Backend?
 - **Answer:**
-  1. **Routes Layer (`routes/`):** API endpoint URLs aur HTTP methods map karta hai.
-  2. **Controller Layer (`controllers/`):** Request receive karta hai, status codes set karta hai, aur response format karta hai.
-  3. **Service Layer (`services/`):** Core business calculations, stock availability checks, aur validations perform karta hai.
-  4. **Model Layer (`models/`):** Parameterized SQL queries execute karta hai (SQL Injection protection ke sath).
+  1. **Controller Layer (`controller/`):** REST API endpoints (`@RestController`), request validation (`@Valid`), aur HTTP response mapping.
+  2. **Service Layer (`service/`):** Core business logic, stock verification, price calculation, aur `@Transactional` boundaries.
+  3. **Repository Layer (`repository/`):** Spring Data JPA repositories with query methods and JPQL/Pessimistic locking.
+  4. **Entity Layer (`entity/`):** JPA Object-Relational Mapping (`@Entity`, `@Table`) for MySQL database schema.
 
 ### Q4: How is Role-Based Access Control (RBAC) implemented?
-- **Answer:** *"Humne **JWT (JSON Web Tokens)** aur **Bcrypt** password encryption use kiya hai. Users ke 3 roles hain: `ADMIN` (Full control), `WAREHOUSE_MANAGER` (Stock transfers & inventory), aur `STAFF` (Orders & Catalog). Hamara `authMiddleware.js` aur `authInterceptor` protected endpoints par permissions verify karte hain."*
+- **Answer:** *"Humne **Spring Security 6**, **JWT (JSON Web Tokens)** aur **BCryptPasswordEncoder** use kiya hai. Users ke 3 roles hain: `ADMIN` (Full control), `WAREHOUSE_MANAGER` (Stock transfers & inventory), aur `STAFF` (Orders & Catalog). Hamara `JwtAuthenticationFilter` incoming bearer token validate karke `SecurityContext` set karta hai."*
 
 ### Q5: What is the role of Angular Standalone Components & HTTP Interceptors?
 - **Answer:** *"Angular 19 Standalone components modules ke boilerplate code ko khatam karke fast client-side rendering provide karte hain. `authInterceptor` har outgoing HTTP request ke sath `Authorization: Bearer <token>` automatically attach karta hai aur 401 token expire hone par auto-logout karta hai."*

@@ -14,12 +14,11 @@ pipeline {
             }
         }
 
-        stage('Backend Tests & Linting') {
+        stage('Backend Tests & Build') {
             steps {
                 dir('backend') {
-                    echo 'Installing backend dependencies & checking syntax...'
-                    sh 'npm install'
-                    sh 'node --check index.js'
+                    echo 'Building and testing Spring Boot backend...'
+                    sh './mvnw clean test -B'
                 }
             }
         }

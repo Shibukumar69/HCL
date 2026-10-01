@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ApiResponse, Product } from '../models/api.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/products';
+  private apiUrl = `${environment.apiUrl}/products`;
 
   getProducts(): Observable<Product[]> {
     return this.http.get<ApiResponse<Product[]>>(this.apiUrl).pipe(

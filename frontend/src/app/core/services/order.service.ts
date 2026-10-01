@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ApiResponse, Order, CreateOrderRequest } from '../models/api.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/orders';
+  private apiUrl = `${environment.apiUrl}/orders`;
 
   getOrders(): Observable<Order[]> {
     return this.http.get<ApiResponse<Order[]>>(this.apiUrl).pipe(

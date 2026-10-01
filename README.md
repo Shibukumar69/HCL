@@ -1,6 +1,6 @@
 # 📦 Retail Inventory Management System (Agile Capstone Case Study - P_022)
 
-> A modern, enterprise-grade, full-stack **Retail Inventory Management System** built with **Node.js, Express, MySQL, Angular 19, and Docker**. Designed following **Agile/Scrum principles across 8 Epics & 15 Sprints**.
+> A modern, enterprise-grade, full-stack **Retail Inventory Management System** built with **Java Spring Boot 3, Spring Data JPA, Spring Security, MySQL 8, Angular 19, and Docker**. Designed following **Agile/Scrum principles across 8 Epics & 15 Sprints**.
 
 ---
 
@@ -15,11 +15,11 @@
                                              REST API | (HTTP/JSON + JWT)
                                                       v
                                   +-------------------+-------------------+
-                                  |       Node.js + Express Backend       |
-                                  |       (Port 5000 / 3-Tier Layered)    |
+                                  |    Java Spring Boot Backend API       |
+                                  |    (Port 5000 / Controller-Service)   |
                                   +-------------------+-------------------+
                                                       |
-                                    Connection Pool   | (ACID Transactions)
+                                     Spring Data JPA  | (ACID Transactions)
                                                       v
                                   +-------------------+-------------------+
                                   |         MySQL 8.0 Database            |
@@ -99,11 +99,14 @@ users (id, name, email, password, role, created_at)
 - **Node.js**: v18+ or v20+
 - **MySQL**: Running on port 3306 (`retail` database created)
 
-### 1. Backend Server:
+### 1. Spring Boot Backend:
 ```bash
 cd backend
-npm install
-npm run dev
+# Windows:
+.\mvnw.cmd spring-boot:run
+
+# Linux / Mac:
+./mvnw spring-boot:run
 # Server runs on http://localhost:5000
 ```
 
